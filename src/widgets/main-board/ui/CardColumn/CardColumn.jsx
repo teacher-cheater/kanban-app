@@ -1,4 +1,4 @@
-import TaskCard from "../../../entities/task/ui/TaskCard";
+import TaskCard from "../../../../entities/task/ui/TaskCard";
 
 export default function CardColumn() {
   return (
