@@ -1,4 +1,5 @@
 import HeaderNav from "./HeaderNav";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ setIsAuth }) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Header({ setIsAuth }) {
               <img src="images/logo_dark.png" alt="logo" />
             </a>
           </div>
-          <HeaderNav handleLogout={handleLogout} />
+          <HeaderNav handleLogout={handleLogout}  />
         </div>
       </div>
     </header>

@@ -6,18 +6,22 @@ import NotFoundPage from "../../../pages/ui/NotFoundPage/NotFoundPage";
 import { PrivateRoute } from "./ProvateRoute";
 
 export default function AppRouter({ isAuth, setIsAuth }) {
+
   return (
     <Routes>
       {/* Главная страница */}
-      <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage />}>
+      <Route element={<PrivateRoute isAuth={isAuth} />}>
+        <Route path="/" element={<MainPage setIsAuth={setIsAuth} />}>
           {/* <Route path="/task/add" element={<NewTaskPage />} /> */}
           {/* <Route path="/task/:id" element={<TaskPage />} /> */}
           {/* <Route path="/train" element={<TrainPage />} /> */}
         </Route>
       </Route>
       {/* Страница входа */}
-      <Route path="/sign-in" element={<SignInPage setIsAuth={setIsAuth} />} />
+      <Route
+        path="/sign-in"
+        element={<SignInPage setIsAuth={setIsAuth} isAuth={isAuth} />}
+      />
       {/* Страница регистрации */}
       <Route path="/sign-up" element={<SignUpPage />} />
 

@@ -1,11 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import BaseButton from "../../../../shared/button/BaseButton";
 import BaseInput from "../../../../shared/input/BaseInput";
 import styles from "./AuthForm.module.scss";
 
-export default function AuthForm({ isSignUp, setIsAuth  }) {
+
+export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
+
+  const [isValidate, setIsValidate] = useState(false);
+  
   const navigate = useNavigate();
-  const hendleLogin = e => {
+  const handleLogin = e => {
     e.preventDefault();
     setIsAuth(true);
     navigate("/");
@@ -31,10 +36,6 @@ export default function AuthForm({ isSignUp, setIsAuth  }) {
               id="login-email"
               placeholder="Эл. почта"
             />
-            <div className={styles.loginError}>
-              Введенные вами данные не распознаны. Проверьте свой логин и пароль
-              и повторите попытку входа.
-            </div>
             <BaseInput
               type="password"
               name="login"
@@ -42,7 +43,16 @@ export default function AuthForm({ isSignUp, setIsAuth  }) {
               placeholder="Пароль"
             />
           </div>
-          <BaseButton textBtn={isSignUp ? "Зарегистрироваться" : "Войти"} type={"submit"} onClick={hendleLogin} />
+          {isValidate && (
+            <div className={styles.loginError}>
+              Введенные вами данные не распознаны. Проверьте свой логин и пароль и
+              повторите попытку входа.
+          </div> )}
+          <BaseButton
+            textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
+            type={"button"}
+            onClick={handleLogin}
+          />
         </form>
         {!isSignUp && (
           <div className={styles.formGroup}>
