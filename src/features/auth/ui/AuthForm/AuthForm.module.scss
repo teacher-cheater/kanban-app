@@ -1,0 +1,55 @@
+.modal{
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 50px 60px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.title{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.24px;
+    margin-bottom: 24px;
+}
+
+.container{    
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.loginError{
+    color: #FF0000;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.formGroup{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 16px;
+    color: #94A6BE66;
+}
+
+.formGroup a{
+    color: #94A6BE66;
+    text-decoration: underline;
+}
