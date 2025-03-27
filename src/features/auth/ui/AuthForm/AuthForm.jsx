@@ -3,15 +3,16 @@ import BaseButton from "../../../../shared/button/BaseButton";
 import BaseInput from "../../../../shared/input/BaseInput";
 import styles from "./AuthForm.module.scss";
 
-export default function AuthForm({ isSignUp }) {
+export default function AuthForm({ isSignUp, setIsAuth  }) {
   const navigate = useNavigate();
   const hendleLogin = e => {
     e.preventDefault();
+    setIsAuth(true);
     navigate("/");
   };
 
   return (
-    <div>
+    <div className={styles.modalWrapper}>
       <div className={styles.modal}>
         <h2 className={styles.title}>{isSignUp ? "Регистрация" : "Вход"}</h2>
         <form className={styles.container}>
@@ -41,7 +42,7 @@ export default function AuthForm({ isSignUp }) {
               placeholder="Пароль"
             />
           </div>
-          <BaseButton textBtn={"Войти"} type={"submit"} onClick={hendleLogin} />
+          <BaseButton textBtn={isSignUp ? "Зарегистрироваться" : "Войти"} type={"submit"} onClick={hendleLogin} />
         </form>
         {!isSignUp && (
           <div className={styles.formGroup}>

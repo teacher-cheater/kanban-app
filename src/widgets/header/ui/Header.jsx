@@ -1,6 +1,13 @@
 import HeaderNav from "./HeaderNav";
 
-export default function Header() {
+export default function Header({ setIsAuth }) {
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    setIsAuth(false);
+    navigate("/sign-in");
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -15,7 +22,7 @@ export default function Header() {
               <img src="images/logo_dark.png" alt="logo" />
             </a>
           </div>
-          <HeaderNav />
+          <HeaderNav handleLogout={handleLogout} />
         </div>
       </div>
     </header>
