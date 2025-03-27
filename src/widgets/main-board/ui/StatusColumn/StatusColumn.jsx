@@ -9,7 +9,7 @@ export default function StatusColumn({ status, loadingTask }) {
   return (
     <div className="main__column column">
       <ColumnTitle>{status}</ColumnTitle>
-      {loadingTask ?  <StatusColumnSkeleton /> : <CardColumn />}
+      {loadingTask ? <StatusColumnSkeleton /> : <CardColumn />}
     </div>
   );
 }
