@@ -11,6 +11,7 @@ export default function BaseInput(props) {
         id={id}
         placeholder={placeholder}
         autoFocus
+        {...props}
       />
     </div>
   );
