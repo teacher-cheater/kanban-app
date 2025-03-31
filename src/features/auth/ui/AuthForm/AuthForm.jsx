@@ -54,17 +54,41 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
     return isValid;
   };
 
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
+  //   try {
+  //     const data = isSignUp
+  //       ? await signUp(userData)
+  //       : await signIn({ email: userData.email, password: userData.password });
+
+  //     console.log("handleSubmit", data);
+
+  //     if (data) {
+  //       localStorage.setItem("token", JSON.stringify(data.token));
+  //       setIsAuth(true);
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
   const handleSubmit = async e => {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      const data = !isSignUp
-        ? await signIn({ email: userData.email, password: userData.password })
-        : await signUp(userData);
+      const data = signUp({
+        login: userData.login,
+        name: userData.login,
+        password: userData.password,
+      });
+
+      console.log("handleSubmit data", data);
 
       if (data) {
-        setIsAuth(true);
         localStorage.setItem("token", JSON.stringify(data.token));
+        setIsAuth(true);
         navigate("/");
       }
     } catch (error) {
@@ -106,6 +130,7 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
               onChange={handleChange}
               error={errors.password}
               value={userData.password}
+              autoComplete="current-password"
             />
           </div>
           <div className={styles.loginError}>{errorMessage}</div>
