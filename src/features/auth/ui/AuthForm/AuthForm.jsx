@@ -7,16 +7,16 @@ import styles from "./AuthForm.module.scss";
 
 export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
   const [isValidate, setIsValidate] = useState(false);
-  const [isError, setIsError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({
-    name: "",
     login: "",
+    email: "",
     password: "",
   });
 
   const [userData, setUserData] = useState({
-    name: "",
     login: "",
+    email: "",
     password: "",
   });
 
@@ -32,24 +32,21 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
   };
 
   const validateForm = () => {
-    const errors = { name: "", login: "", password: "" };
+    const errors = { login: "", email: "", password: "" };
     let isValid = true;
 
-    if (isSignUp && !userData.name.trim()) {
-      errors.name = true;
-      setErrors("Имя обязательное поле");
+    if (isSignUp && !userData.login.trim()) {
+      errors.login = true;
       isValid = false;
     }
 
-    if (!userData.login.trim()) {
-      errors.login = true;
-      setErrors("Логин обязательное поле");
+    if (!userData.email.trim()) {
+      errors.email = true;
       isValid = false;
     }
 
     if (!userData.password.trim()) {
       errors.password = true;
-      setErrors("Пароль обязательное поле");
       isValid = false;
     }
 
@@ -62,12 +59,12 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
     if (!validateForm()) return;
     try {
       const data = !isSignUp
-        ? await signIn({ login: userData.login, password: userData.password })
+        ? await signIn({ email: userData.email, password: userData.password })
         : await signUp(userData);
 
       if (data) {
         setIsAuth(true);
-        localStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("token", JSON.stringify(data.token));
         navigate("/");
       }
     } catch (error) {
@@ -84,37 +81,37 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
             {isSignUp && (
               <BaseInput
                 type="text"
-                name="username"
-                id="username"
+                name="login"
+                id="login"
                 placeholder="Введите логин"
                 onChange={handleChange}
-                error={errors.name}
-                value={userData.name}
+                error={errors.login}
+                value={userData.login}
               />
             )}
             <BaseInput
               type="text"
-              name="login"
-              id="login-email"
+              name="email"
+              id="email"
               placeholder="Эл. почта"
               onChange={handleChange}
-              error={errors.login}
-              value={userData.login}
+              error={errors.email}
+              value={userData.email}
             />
             <BaseInput
               type="password"
               name="password"
-              id="login-password"
+              id="password"
               placeholder="Пароль"
               onChange={handleChange}
               error={errors.password}
               value={userData.password}
             />
           </div>
-          <div className={styles.loginError}>{isError}</div>
+          <div className={styles.loginError}>{errorMessage}</div>
           <BaseButton
             textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
-            type={"button"}
+            type="submit"
             onClick={handleLogin}
           />
         </form>
