@@ -5,13 +5,13 @@ import PopupExit from "../../../shared/popup/PopupExit";
 import Header from "../../../widgets/header/ui/Header";
 import Main from "../../../widgets/main/Main/Main";
 
-export default function MainPage({ setIsAuth }) {
+export default function MainPage() {
   return (
     <div className="wrapper">
       <PopupExit />
       <NewCard />
       <CreateTask />
-      <Header setIsAuth={setIsAuth} />
+      <Header />
       <Main />
       <Outlet />
     </div>

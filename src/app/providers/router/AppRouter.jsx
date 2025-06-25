@@ -8,27 +8,20 @@ import SignUpPage from "../../../pages/ui/SignUpPage/SignUpPage";
 import NotFoundPage from "../../../pages/ui/NotFoundPage/NotFoundPage";
 
 export default function AppRouter() {
-  const [isAuth, setIsAuth] = useState(false);
   return (
     <Routes>
       {/* Главная страница */}
-      <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage setIsAuth={setIsAuth} />}>
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<MainPage />}>
           {/* <Route path="/task/add" element={<NewTaskPage />} /> */}
           {/* <Route path="/task/:id" element={<TaskPage />} /> */}
           {/* <Route path="/train" element={<TrainPage />} /> */}
         </Route>
       </Route>
       {/* Страница входа */}
-      <Route
-        path="/sign-in"
-        element={<SignInPage setIsAuth={setIsAuth} isAuth={isAuth} />}
-      />
+      <Route path="/sign-in" element={<SignInPage />} />
       {/* Страница регистрации */}
-      <Route
-        path="/sign-up"
-        element={<SignUpPage setIsAuth={setIsAuth} isAuth={isAuth} />}
-      />
+      <Route path="/sign-up" element={<SignUpPage />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />

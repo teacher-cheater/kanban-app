@@ -1,10 +1,10 @@
 import React from "react";
 import AuthForm from "../../../features/auth/ui/AuthForm/AuthForm";
 
-export default function SignUpPage({ isAuth, setIsAuth }) {
+export default function SignUpPage() {
   return (
     <div>
-      <AuthForm isSignUp isAuth={isAuth} setIsAuth={setIsAuth} />
+      <AuthForm isSignUp />
     </div>
   );
 }

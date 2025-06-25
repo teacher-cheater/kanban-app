@@ -8,6 +8,8 @@ import styles from "./AuthForm.module.scss";
 
 export default function AuthForm({ isSignUp }) {
   const { updateUserInfo } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
+
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({
     login: false,
