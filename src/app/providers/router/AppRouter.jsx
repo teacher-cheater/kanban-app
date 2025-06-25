@@ -23,7 +23,7 @@ export default function AppRouter({ isAuth, setIsAuth }) {
         element={<SignInPage setIsAuth={setIsAuth} isAuth={isAuth} />}
       />
       {/* Страница регистрации */}
-      <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/sign-up" element={<SignUpPage setIsAuth={setIsAuth} isAuth={isAuth} />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />

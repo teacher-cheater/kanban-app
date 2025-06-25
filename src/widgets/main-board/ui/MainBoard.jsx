@@ -1,6 +1,8 @@
 import StatusColumn from "./StatusColumn/StatusColumn";
 
-export default function MainBoard({ isLoading }) {
+export default function MainBoard(props) {
+  const { isLoading, tasks, isError } = props;
+
   const allStatus = [
     "Без статуса",
     "Нужно сделать",
@@ -13,7 +15,12 @@ export default function MainBoard({ isLoading }) {
     <div className="main__block">
       <div className="main__content">
         {allStatus.map((status, index) => (
-          <StatusColumn status={status} key={index} isLoading={isLoading} />
+          <StatusColumn
+            status={status}
+            tasks={tasks}
+            key={index}
+            isLoading={isLoading}
+          />
         ))}
       </div>
     </div>

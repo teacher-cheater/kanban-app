@@ -5,94 +5,73 @@ import BaseInput from "../../../../shared/input/BaseInput";
 import { signIn, signUp } from "../../api/authApi";
 import styles from "./AuthForm.module.scss";
 
-export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
-  const [isValidate, setIsValidate] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+export default function AuthForm({ isSignUp, setIsAuth }) {
+  const [error, setError] = useState("");
   const [errors, setErrors] = useState({
-    login: "",
-    email: "",
-    password: "",
+    login: false,
+    name: false,
+    password: false,
   });
 
   const [userData, setUserData] = useState({
     login: "",
-    email: "",
+    name: "",
     password: "",
   });
 
-  const handleChange = e => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-
   const navigate = useNavigate();
-  const handleLogin = e => {
-    e.preventDefault();
-    setIsAuth(true);
-    navigate("/");
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+    setErrors({ ...errors, [name]: false });
+    setError("");
   };
 
   const validateForm = () => {
-    const errors = { login: "", email: "", password: "" };
+    const newErrors = { name: "", login: "", password: "" };
     let isValid = true;
 
-    if (isSignUp && !userData.login.trim()) {
-      errors.login = true;
+    if (isSignUp && !userData.name.trim()) {
+      newErrors.name = true;
+      setError("Заполните все поля");
       isValid = false;
     }
 
-    if (!userData.email.trim()) {
-      errors.email = true;
+    if (!userData.login.trim()) {
+      newErrors.login = true;
+      setError("Заполните все поля");
       isValid = false;
     }
 
     if (!userData.password.trim()) {
-      errors.password = true;
+      newErrors.password = true;
+      setError("Заполните все поля");
       isValid = false;
     }
 
-    setErrors(errors);
+    setErrors(newErrors);
     return isValid;
   };
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!validateForm()) return;
-  //   try {
-  //     const data = isSignUp
-  //       ? await signUp(userData)
-  //       : await signIn({ email: userData.email, password: userData.password });
-
-  //     console.log("handleSubmit", data);
-
-  //     if (data) {
-  //       localStorage.setItem("token", JSON.stringify(data.token));
-  //       setIsAuth(true);
-  //       navigate("/");
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
 
   const handleSubmit = async e => {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      const data = signUp({
-        login: userData.login,
-        name: userData.login,
-        password: userData.password,
-      });
-
-      console.log("handleSubmit data", data);
+      const data = isSignUp
+        ? await signUp(userData)
+        : await signIn({ login: userData.login, password: userData.password });
 
       if (data) {
-        localStorage.setItem("token", JSON.stringify(data.token));
         setIsAuth(true);
+        localStorage.setItem("userInfo", JSON.stringify(data));
         navigate("/");
       }
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -105,27 +84,27 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
             {isSignUp && (
               <BaseInput
                 type="text"
-                name="login"
-                id="login"
-                placeholder="Введите логин"
+                name="name"
+                id="formname"
+                placeholder="Имя"
                 onChange={handleChange}
-                error={errors.login}
-                value={userData.login}
+                error={errors.name}
+                value={userData.name}
               />
             )}
             <BaseInput
+              error={errors.login}
               type="text"
-              name="email"
-              id="email"
+              name="login"
+              id="formlogin"
               placeholder="Эл. почта"
+              value={userData.login}
               onChange={handleChange}
-              error={errors.email}
-              value={userData.email}
             />
             <BaseInput
               type="password"
               name="password"
-              id="password"
+              id="formpassword"
               placeholder="Пароль"
               onChange={handleChange}
               error={errors.password}
@@ -133,11 +112,10 @@ export default function AuthForm({ isSignUp, setIsAuth, isAuth }) {
               autoComplete="current-password"
             />
           </div>
-          <div className={styles.loginError}>{errorMessage}</div>
+          <div className={styles.loginError}>{error}</div>
           <BaseButton
             textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="submit"
-            onClick={handleLogin}
           />
         </form>
         {!isSignUp && (

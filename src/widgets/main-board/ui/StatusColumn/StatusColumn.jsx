@@ -5,11 +5,11 @@ import CardColumn from "../CardColumn/CardColumn";
 import "./StatusColumn.css";
 import StatusColumnSkeleton from "./StatusColumnSkeleton";
 
-export default function StatusColumn({ status, isLoading }) {
+export default function StatusColumn({ tasks, status, isLoading }) {
   return (
     <div className="main__column column">
       <ColumnTitle>{status}</ColumnTitle>
-      {isLoading ? <StatusColumnSkeleton /> : <CardColumn />}
+      {isLoading ? <StatusColumnSkeleton /> : <CardColumn tasks={tasks} />}
     </div>
   );
 }

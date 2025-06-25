@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import MainBoard from "../../main-board/ui/MainBoard";
+import { fetchTasks } from "../../../shared/api/api";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./Main.css";
 
 export default function Main() {
   const [tasks, setTasks] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const delay = 2000;
@@ -12,13 +14,11 @@ export default function Main() {
   const getTasks = useCallback(async () => {
     try {
       setIsLoading(true);
-      const data = await getTasks({
-        token:
-          localStorage.getItem("token") ||
-          "bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck",
+      const data = await fetchTasks({
+        token: JSON.parse(localStorage.getItem("token")),
       });
       if (data) {
-        setTasks(data);
+        setTasks(data?.tasks);
       }
       setIsLoading(false);
     } catch (error) {
@@ -40,7 +40,7 @@ export default function Main() {
   return (
     <main className="main">
       <div className="container">
-        <MainBoard isLoading={isLoading} />
+        <MainBoard tasks={tasks} isLoading={isLoading} isError={isError} />
       </div>
     </main>
   );

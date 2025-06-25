@@ -6,7 +6,6 @@ import Header from "../../../widgets/header/ui/Header";
 import Main from "../../../widgets/main/Main/Main";
 
 export default function MainPage({ setIsAuth }) {
-
   return (
     <div className="wrapper">
       <PopupExit />

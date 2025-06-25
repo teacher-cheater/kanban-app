@@ -1,7 +1,7 @@
 import styles from "./BaseInput.module.css";
 
 export default function BaseInput(props) {
-  const { type, name, placeholder, id } = props;
+  const { type, name, placeholder, id, error } = props;
   return (
     <div>
       <input
@@ -13,6 +13,7 @@ export default function BaseInput(props) {
         autoFocus
         {...props}
       />
+      {error && <div className={styles.errorText}>Обязательное поле</div>}
     </div>
   );
 }
