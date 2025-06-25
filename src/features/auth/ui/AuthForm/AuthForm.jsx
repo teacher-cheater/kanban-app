@@ -1,11 +1,13 @@
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import BaseButton from "../../../../shared/button/BaseButton";
 import BaseInput from "../../../../shared/input/BaseInput";
 import { signIn, signUp } from "../../api/authApi";
+import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
 import styles from "./AuthForm.module.scss";
 
-export default function AuthForm({ isSignUp, setIsAuth }) {
+export default function AuthForm({ isSignUp }) {
+  const { updateUserInfo } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({
     login: false,
@@ -66,8 +68,7 @@ export default function AuthForm({ isSignUp, setIsAuth }) {
         : await signIn({ login: userData.login, password: userData.password });
 
       if (data) {
-        setIsAuth(true);
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        updateUserInfo(data);
         navigate("/");
       }
     } catch (error) {

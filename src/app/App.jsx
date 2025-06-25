@@ -1,11 +1,13 @@
-import { useState } from "react";
 import AppRouter from "./providers/router/AppRouter";
 import "./App.css";
+import { AuthProvider } from "./providers/router/AuthProvider/AuthProvider";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-
-  return <AppRouter isAuth={isAuth} setIsAuth={setIsAuth} />;
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
 }
 
 export default App;
