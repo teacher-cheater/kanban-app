@@ -1,4 +1,4 @@
-import UserMenu from "./UserMenu";
+import UserMenu from "../ui/UserMenu/UserMenu";
 import BaseButton from "../../../shared/button/BaseButton";
 
 export default function HeaderNav({handleLogout}) {
