@@ -10,12 +10,12 @@ export default function MainPage() {
   return (
     <div className="wrapper">
       <TasksProvider>
-        <PopupExit />
-        <NewCard />
+        {/* <PopupExit /> */}
+        {/* <NewCard /> */}
         <CreateTask />
         <Header />
         <Main />
-        <Outlet />
+        {/* <Outlet /> */}
       </TasksProvider>
     </div>
   );

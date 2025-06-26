@@ -1,6 +1,8 @@
 import ModalExit from "../../ModalExit";
 
-export default function PopupExit() {
+export default function PopupExit({handleClose}) {
+  console.log(handleClose);
+  
   return (
     // <div className="pop-exit">
     //   <div className="pop-exit__container">
@@ -18,7 +20,7 @@ export default function PopupExit() {
             <div className="pop-exit__ttl">
               <h2>Выйти из аккаунта?</h2>
             </div>
-            <ModalExit />
+            <ModalExit handleClose={handleClose} />
           </div>
         </div>
       </div>

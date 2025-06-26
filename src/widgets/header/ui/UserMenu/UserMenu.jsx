@@ -6,13 +6,18 @@ import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthC
 
 import styles from "../UserMenu/UserMenu.module.scss";
 
-export default function UserMenu({ handleLogout }) {
+export default function UserMenu() {
   const { user, logout } = useContext(AuthContext);
   const [isPopupExitOpen, setIsPopupExitOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
 
   const handleOpen = () => setIsPopupExitOpen(true);
-  const handleClose = () => setIsPopupExitOpen(false);
+  const handleClose = () => {
+    console.log("handleClose", handleClose);
+    setIsPopupExitOpen(false);
+  };
+  console.log(handleClose);
+  
   const handleModalOpen = () => setIsModal(true);
   const handleModalClose = () => setIsModal(false);
 
@@ -28,7 +33,7 @@ export default function UserMenu({ handleLogout }) {
           <p className={styles.mail}>{user.login}</p>
           <ThemeSwitcher />
           <BaseButton textBtn={"Выйти"} type={"button"} onClick={handleOpen} />
-          {isPopupExitOpen && <PopupExit />}
+          {isPopupExitOpen && <PopupExit handleClose={handleClose} />}
         </div>
       )}
     </div>
