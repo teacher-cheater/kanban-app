@@ -8,21 +8,20 @@ function TasksProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
-  console.log("tasks", tasks);
 
   useEffect(() => {
     const loadTasks = async () => {
       setLoading(true);
       try {
-        const data = await fetchTasks({ tiken: user, token });
-        if (data) setTasks(data);
+        const data = await fetchTasks({ token: user.token });
+        if (data) setTasks(data.tasks);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-    loadTasks();
+    if (user?.token) loadTasks();
   }, [user.token]);
 
   return (

@@ -1,7 +1,7 @@
 import StatusColumn from "./StatusColumn/StatusColumn";
 
 export default function MainBoard(props) {
-  const { isLoading, tasks, isError } = props;
+  const { isLoading, tasks, isError, errorMessage } = props;
 
   const allStatus = [
     "Без статуса",
