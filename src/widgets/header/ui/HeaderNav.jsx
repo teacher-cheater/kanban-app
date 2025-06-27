@@ -5,7 +5,6 @@ import NewCard from "../../../shared/popup/NewCard";
 
 export default function HeaderNav() {
   const [isModal, setIsModal] = useState(false);
-  console.log("isModal", isModal);
 
   const handleOpen = () => setIsModal(true);
   const handleClose = () => setIsModal(false);
