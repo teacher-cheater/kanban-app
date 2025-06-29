@@ -4,7 +4,7 @@ import BaseButton from "../../../../shared/button/BaseButton";
 import BaseInput from "../../../../shared/input/BaseInput";
 import { signIn, signUp } from "../../api/authApi";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
-import styles from "./AuthForm.module.scss";
+import cls from "./AuthForm.module.scss";
 
 export default function AuthForm({ isSignUp }) {
   const { updateUserInfo } = useContext(AuthContext);
@@ -79,11 +79,11 @@ export default function AuthForm({ isSignUp }) {
   };
 
   return (
-    <div className={styles.modalWrapper}>
-      <div className={styles.modal}>
-        <h2 className={styles.title}>{isSignUp ? "Регистрация" : "Вход"}</h2>
-        <form className={styles.container} onSubmit={handleSubmit}>
-          <div className={styles.inputWrapper}>
+    <div className={cls.modalWrapper}>
+      <div className={cls.modal}>
+        <h2 className={cls.title}>{isSignUp ? "Регистрация" : "Вход"}</h2>
+        <form className={cls.container} onSubmit={handleSubmit}>
+          <div className={cls.inputWrapper}>
             {isSignUp && (
               <BaseInput
                 type="text"
@@ -115,20 +115,20 @@ export default function AuthForm({ isSignUp }) {
               autoComplete="current-password"
             />
           </div>
-          <div className={styles.loginError}>{error}</div>
+          <div className={cls.loginError}>{error}</div>
           <BaseButton
             textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="submit"
           />
         </form>
         {!isSignUp && (
-          <div className={styles.formGroup}>
+          <div className={cls.formGroup}>
             <p>Нужно зарегистрироваться?</p>
             <Link to="/sign-up">Регистрируйтесь здесь</Link>
           </div>
         )}
         {isSignUp && (
-          <div className={styles.formGroup}>
+          <div className={cls.formGroup}>
             <p>Уже есть аккаунт?</p>
             <Link to="/sign-in"> Войдите здесь</Link>
           </div>

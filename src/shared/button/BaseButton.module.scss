@@ -1,6 +1,6 @@
 .baseButton {
-  background-color: #565EEF;
-  color: #fff;
+  background-color: var(--bg-primary-color);
+  color: var(--text-color);
   border-radius: 5px;
   padding: 10px;
   width: 100%;
@@ -12,7 +12,5 @@
 }
 
 .baseButton:hover {
-  background-color: #4556DB;
+  background-color: var(--bg-secondary-color);
 }
-
-

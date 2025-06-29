@@ -1,7 +1,8 @@
 import { useState } from "react";
-import UserMenu from "../ui/UserMenu/UserMenu";
-import BaseButton from "../../../shared/button/BaseButton";
-import NewCard from "../../../shared/popup/NewCard";
+import UserMenu from "../UserMenu/UserMenu";
+import BaseButton from "../../../../shared/button/BaseButton";
+import NewCard from "../../../../shared/popup/NewCard";
+import cls from "./HeaderNav.module.scss";
 
 export default function HeaderNav() {
   const [isModal, setIsModal] = useState(false);
@@ -10,9 +11,9 @@ export default function HeaderNav() {
   const handleClose = () => setIsModal(false);
 
   return (
-    <nav className="header__nav">
+    <nav className={cls["header__nav"]}>
       <BaseButton
-        className="header__btn-main-new _hover01"
+        className={cls["header__btn-main-new _hover01"]}
         textBtn={"Создать новую задачу"}
         onClick={handleOpen}
       />
