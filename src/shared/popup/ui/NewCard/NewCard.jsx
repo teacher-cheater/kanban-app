@@ -1,3 +1,5 @@
+import BaseButton from "../../../button/BaseButton";
+
 export default function NewCard({ handleClose }) {
   return (
     <div className="pop-new-card">
@@ -129,8 +131,8 @@ export default function NewCard({ handleClose }) {
                   <input type="hidden" id="datepick_value" value="08.09.2023" />
                   <div className="calendar__period">
                     <p className="calendar__p date-end">
-                      Выберите срок исполнения{" "}
-                      <span className="date-control"></span>.
+                      Выберите срок исполнения <span className="date-control" />
+                      .
                     </p>
                   </div>
                 </div>
@@ -150,9 +152,12 @@ export default function NewCard({ handleClose }) {
                 </div>
               </div>
             </div>
-            <button className="form-new__create _hover01" id="btnCreate">
-              Создать задачу
-            </button>
+            <BaseButton
+              textBtn={"Создать задачу"}
+              type={"button"}
+              onClick={() => console.log("create")}
+              className="form-new__create _hover01"
+            />
           </div>
         </div>
       </div>

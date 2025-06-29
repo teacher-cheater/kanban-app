@@ -14,14 +14,15 @@ export default function MainBoard(props) {
   return (
     <div className="main__block">
       <div className="main__content">
-        {allStatus.map((status, index) => (
-          <StatusColumn
+        {allStatus.map((status, index) => {
+          const filteredTasks = tasks.filter(task => task.status === status);
+          return <StatusColumn
             status={status}
-            tasks={tasks}
+            tasks={filteredTasks}
             key={index}
             isLoading={isLoading}
-          />
-        ))}
+          />;
+        })}
       </div>
     </div>
   );

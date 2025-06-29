@@ -61,7 +61,7 @@ body {
 }
 
 ._hover01:hover {
-  background-color: #33399b;
+  background-color: var(--hover-bg-01);
 }
 
 ._hover02:hover,
@@ -203,6 +203,7 @@ input[type=checkbox] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  cursor: pointer;
 }
 
 input[type=checkbox]::before {

@@ -29,9 +29,11 @@ export default function UserMenu() {
           <div
             className={cls["user-menu__close-btn"]}
             onClick={handleModalClose}
-          ></div>
-          <p className={cls["user-menu__name"]}>{user.name}</p>
-          <p className={cls["user-menu__email"]}>{user.login}</p>
+          />
+          <div className={cls["user-menu__data"]}>
+            <p className={cls["user-menu__name"]}>{user.name}</p>
+            <p className={cls["user-menu__email"]}>{user.login}</p>
+          </div>
           <ThemeSwitcher />
           <BaseButton textBtn={"Выйти"} type={"button"} onClick={handleOpen} />
           {isPopupExitOpen && <PopupExit handleClose={handleClose} />}

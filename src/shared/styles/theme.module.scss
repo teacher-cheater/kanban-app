@@ -3,6 +3,7 @@
   --primary-color: #000000;
   --bg-color: #f1f1f1;
   // --bg-main: #ffffff;
+  --border-primary: #d4dbe5;
 
   --bg-primary-color: #565eef;
   --bg-secondary-color: #4556db;
@@ -22,12 +23,14 @@
 
   --gray-bg: #94a6be;
   --gray-text: #ffffff;
+  --border: #4e5566;
 }
 
 [data-theme="_dark"] {
   --primary-color: #ffffff;
   --bg-color: #151419;
   // --bg-main: #151419;
+  --border-primary: #4e5566;
 
   --bg-primary-color: #565eef;
   --bg-secondary-color: #4556db;
@@ -47,4 +50,5 @@
 
   --gray-bg: #94a6be;
   --gray-text: #ffffff;
+  --border: #4e5566;
 }

@@ -1,6 +1,7 @@
 .user-menu {
   position: relative;
-
+  cursor: pointer;
+  transition: hover 0.3s;
   &__info {
     &:hover {
       color: var(--hover-bg-01);
@@ -47,5 +48,12 @@
       position: absolute;
       transform: rotate(-90deg);
     }
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 }
