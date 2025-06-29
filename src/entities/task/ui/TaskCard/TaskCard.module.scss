@@ -17,6 +17,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
     align-items: flex-start;
     justify-content: stretch;
     padding: 15px 13px 19px;
@@ -41,5 +42,16 @@
       font-weight: 600;
       line-height: 10px;
     }
+  }
+
+  &__title{
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__date{
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
 }

@@ -5,6 +5,17 @@ export default function TaskCard(props) {
 
   const clsLabel = themeLabel ? `${themeLabel}` : "";
 
+  function formatDate(isoDateString) {
+    const date = new Date(isoDateString);
+    return new Intl.DateTimeFormat("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+      .format(date)
+      .replace(/\//g, ".");
+  }
+
   return (
     <article className={cls["card-task"]}>
       <div className={cls["card-task__item"]}>
@@ -53,7 +64,7 @@ export default function TaskCard(props) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{task.date}</p>
+            <p>{formatDate(task.date)}</p>
           </div>
         </div>
       </div>
