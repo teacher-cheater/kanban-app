@@ -1,7 +1,8 @@
 :root {
   /* light theme */
-  --text-color: #000000;
+  --primary-color: #000000;
   --bg-color: #f1f1f1;
+  // --bg-main: #ffffff;
 
   --bg-primary-color: #565eef;
   --bg-secondary-color: #4556db;
@@ -24,8 +25,9 @@
 }
 
 [data-theme="_dark"] {
-  --text-color: #ffffff;
+  --primary-color: #ffffff;
   --bg-color: #151419;
+  // --bg-main: #151419;
 
   --bg-primary-color: #565eef;
   --bg-secondary-color: #4556db;
