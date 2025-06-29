@@ -35,7 +35,7 @@ export default function TaskCard(props) {
           <a href="" target="_blank">
             <h3 className={cls["card-task__title"]}>{task.title}</h3>
           </a>
-          <div className={cls["card-task__date"]}>
+          <div className={cls["card-task__date-info"]}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -64,7 +64,7 @@ export default function TaskCard(props) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{formatDate(task.date)}</p>
+            <p className={cls["card-task__date"]}>{formatDate(task.date)}</p>
           </div>
         </div>
       </div>
