@@ -2,7 +2,9 @@
   position: relative;
   cursor: pointer;
   transition: hover 0.3s;
+  padding-right: 10px;
   &__info {
+    color: var(--bg-primary-color);
     &:hover {
       color: var(--hover-bg-01);
     }

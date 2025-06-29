@@ -1,8 +1,8 @@
 :root {
   /* light theme */
   --primary-color: #000000;
-  // --bg-color: #f1f1f1;
   --bg-color: #ffffff;
+  --bg-main: #f1f1f1;
   --border-primary: #d4dbe5;
 
   --bg-primary-color: #565eef;
@@ -25,14 +25,15 @@
   --gray-text: #ffffff;
   --border: #4e5566;
 
+  // size
   --small-size: 10px;
   --main-size: 14px;
 }
 
 [data-theme="_dark"] {
   --primary-color: #ffffff;
-  --bg-color: #151419;
-  // --bg-main: #151419;
+  --bg-color: #20202c;
+  --bg-main: #151419;
   --border-primary: #4e5566;
 
   --bg-primary-color: #565eef;
