@@ -1,42 +1,23 @@
+import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
+import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
+import cls from "./NewCard.module.scss";
 
 export default function NewCard({ handleClose }) {
   return (
-    <div className="pop-new-card">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl"> Создание задачи </h3>
-            <button onClick={handleClose} className="pop-new-card__close">
+    <div className={cls["pop-new-card"]}>
+      <div className={cls["pop-new-card__container"]}>
+        <div className={cls["pop-new-card__block"]}>
+          <div className={cls["pop-new-card__content"]}>
+            <h3 className={cls["pop-new-card__ttl"]}> Создание задачи </h3>
+            <button
+              onClick={handleClose}
+              className={cls["pop-new-card__close"]}
+            >
               &#10006;
             </button>
-            <div className="pop-new-card__wrap">
-              <form className="pop-new-card__form form-new" id="formNewCard">
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
-                    type="text"
-                    name="name"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus
-                  />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
-                    name="text"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                  ></textarea>
-                </div>
-              </form>
+            <div className={cls["pop-new-card__wrap"]}>
+              <Form />
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -138,20 +119,7 @@ export default function NewCard({ handleClose }) {
                 </div>
               </div>
             </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div>
-            </div>
+            <CategoriesLabel />
             <BaseButton
               textBtn={"Создать задачу"}
               type={"button"}
