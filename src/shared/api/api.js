@@ -14,7 +14,7 @@ export async function fetchTasks({ token }) {
   }
 }
 
-export async function postTasks({ token, task }) {
+export async function addTask({ token, task }) {
   // const task = {
   //   title: "Новая задача 2!",
   //   topic: "Research",
@@ -22,16 +22,18 @@ export async function postTasks({ token, task }) {
   //   description: "Подробное описание задачи",
   //   date: "2024-01-07T16:26:18.179Z",
   // };
+  console.log("token", token);
+  console.log("task", task);
 
   try {
-    const data = await axios.post(API_URL, task, {
+    const response = await axios.post(API_URL, task, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "text/html",
+        "Content-Type": "",
       },
-      body: JSON.stringify(task),
     });
-    return data.data;
+    console.log('response', response);
+    return response.data;
   } catch (error) {
     throw new Error(error.message);
   }

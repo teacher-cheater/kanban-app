@@ -1,19 +1,50 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
 import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
+import { addTask } from "../../../api/api";
+import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
+import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
 import cls from "./NewCard.module.scss";
 
 export default function NewCard({ handleClose }) {
-  const [activeCategory, setActiveCategory] = useState("web");
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const { setTasks } = useContext(TasksContext);
+  const { user } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("activeCategory", activeCategory);
-    console.log("title", title);
-    console.log("text", text);
+  const [activeCategory, setActiveCategory] = useState("web");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [task, setTask] = useState({
+    title: "",
+    topic: "Research",
+    status: "Без статуса",
+    description: "",
+    date: "2024-01-07T16:26:18.179Z",
+  });
+
+  const createTask = e => {
+    // e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    //  || !task.date
+    if (!task.title || !task.description) {
+      setError("Пожалуйста, заполните все поля");
+      return;
+    }
+    console.log();
+
+    addTask({ task, token: user.token })
+      .then(res => {
+        setTasks(res.tasks);
+        navigate(AppRoutes.MAIN);
+      })
+      .catch(() => {
+        setError("Что-то пошло не так. Попробуйте еще раз");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -28,12 +59,15 @@ export default function NewCard({ handleClose }) {
             >
               &#10006;
             </button>
+
+            {error && <div>{error}</div>}
+
             <div className={cls["pop-new-card__wrap"]}>
               <Form
-                setTitle={setTitle}
-                setText={setText}
-                title={title}
-                text={text}
+                task={task}
+                setTask={setTask}
+                title={task.title}
+                description={task.description}
               />
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
@@ -141,10 +175,11 @@ export default function NewCard({ handleClose }) {
               setActiveCategory={setActiveCategory}
             />
             <BaseButton
-              textBtn={"Создать задачу"}
+              textBtn={isLoading ? "Создание..." : "Создать задачу"}
               type={"button"}
-              onClick={() => handleSubmit()}
+              onClick={() => createTask()}
               className="form-new__create _hover01"
+              disabled={isLoading}
             />
           </div>
         </div>
