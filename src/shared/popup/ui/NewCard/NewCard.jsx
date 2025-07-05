@@ -1,9 +1,21 @@
+import { useState } from "react";
 import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
 import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
 import cls from "./NewCard.module.scss";
 
 export default function NewCard({ handleClose }) {
+  const [activeCategory, setActiveCategory] = useState("web");
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("activeCategory", activeCategory);
+    console.log("title", title);
+    console.log("text", text);
+  };
+
   return (
     <div className={cls["pop-new-card"]}>
       <div className={cls["pop-new-card__container"]}>
@@ -17,7 +29,12 @@ export default function NewCard({ handleClose }) {
               &#10006;
             </button>
             <div className={cls["pop-new-card__wrap"]}>
-              <Form />
+              <Form
+                setTitle={setTitle}
+                setText={setText}
+                title={title}
+                text={text}
+              />
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -119,11 +136,14 @@ export default function NewCard({ handleClose }) {
                 </div>
               </div>
             </div>
-            <CategoriesLabel />
+            <CategoriesLabel
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
             <BaseButton
               textBtn={"Создать задачу"}
               type={"button"}
-              onClick={() => console.log("create")}
+              onClick={() => handleSubmit()}
               className="form-new__create _hover01"
             />
           </div>
