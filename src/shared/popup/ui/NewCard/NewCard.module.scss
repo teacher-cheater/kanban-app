@@ -44,6 +44,10 @@
     margin-bottom: 20px;
   }
 
+  &__error {
+    color: red;
+  }
+
   &__close {
     position: absolute;
     border: none;

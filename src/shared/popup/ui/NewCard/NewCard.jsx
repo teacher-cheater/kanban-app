@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
 import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
+import { useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/api";
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
@@ -10,6 +11,7 @@ import cls from "./NewCard.module.scss";
 export default function NewCard({ handleClose }) {
   const { setTasks } = useContext(TasksContext);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [activeCategory, setActiveCategory] = useState("web");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,16 +29,18 @@ export default function NewCard({ handleClose }) {
     setIsLoading(true);
     setError(null);
 
-    //  || !task.date
-    if (!task.title || !task.description) {
+    if (!task.title || !task.description || !task.date) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
-    
+
     addTask({ task, token: user.token })
       .then(res => {
         setTasks(res.tasks);
-        navigate(AppRoutes.MAIN);
+        navigate("/");
+        task.title = "";
+        task.description = "";
+        handleClose();
       })
       .catch(() => {
         setError("Что-то пошло не так. Попробуйте еще раз");
@@ -51,16 +55,19 @@ export default function NewCard({ handleClose }) {
       <div className={cls["pop-new-card__container"]}>
         <div className={cls["pop-new-card__block"]}>
           <div className={cls["pop-new-card__content"]}>
-            <h3 className={cls["pop-new-card__ttl"]}> Создание задачи </h3>
+            <h3 className={cls["pop-new-card__ttl"]}>
+              {error ? (
+                <div className={cls["pop-new-card__error"]}>{error}</div>
+              ) : (
+                "Создание задачи"
+              )}
+            </h3>
             <button
               onClick={handleClose}
               className={cls["pop-new-card__close"]}
             >
               &#10006;
             </button>
-
-            {error && <div>{error}</div>}
-
             <div className={cls["pop-new-card__wrap"]}>
               <Form
                 task={task}
