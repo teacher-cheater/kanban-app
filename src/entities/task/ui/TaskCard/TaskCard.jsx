@@ -2,6 +2,7 @@ import cls from "./TaskCard.module.scss";
 
 export default function TaskCard(props) {
   const { task, themeLabel } = props;
+  console.log("themeLabel", themeLabel);
 
   const clsLabel = themeLabel ? `${themeLabel}` : "";
 

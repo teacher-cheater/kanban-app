@@ -13,15 +13,15 @@ export default function NewCard({ handleClose }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [activeCategory, setActiveCategory] = useState("web");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [date, setDate] = useState(new Date().toISOString());
   const [task, setTask] = useState({
     title: "",
     topic: "Research",
     status: "Без статуса",
     description: "",
-    date: "2024-01-07T16:26:18.179Z",
+    date,
   });
 
   const createTask = e => {
@@ -176,10 +176,7 @@ export default function NewCard({ handleClose }) {
                 </div>
               </div>
             </div>
-            <CategoriesLabel
-              activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
-            />
+            <CategoriesLabel topic={task.topic} setTask={setTask} task={task} />
             <BaseButton
               textBtn={isLoading ? "Создание..." : "Создать задачу"}
               type={"button"}

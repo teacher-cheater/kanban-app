@@ -3,9 +3,9 @@ import TaskCard from "../../../../entities/task/ui/TaskCard/TaskCard";
 export default function CardColumn({ tasks, status }) {
   function getThemeLabel(topic) {
     const topicColors = {
-      "Web Design": "_orange",
-      Research: "_green",
-      Copywriting: "_purple",
+      web: "_orange",
+      research: "_green",
+      copywriting: "_purple",
     };
 
     return topicColors[topic] || "_gray";
