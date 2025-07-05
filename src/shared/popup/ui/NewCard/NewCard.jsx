@@ -7,6 +7,7 @@ import { addTask } from "../../../api/api";
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
 import cls from "./NewCard.module.scss";
+import Calendar from "../../../../widgets/calendar/Calendar";
 
 export default function NewCard({ handleClose }) {
   const { setTasks } = useContext(TasksContext);
@@ -15,13 +16,14 @@ export default function NewCard({ handleClose }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [date, setDate] = useState(new Date().toISOString());
+  // const [date, setDate] = useState(new Date().toISOString());
+
   const [task, setTask] = useState({
     title: "",
     topic: "Research",
     status: "Без статуса",
     description: "",
-    date,
+    date: null,
   });
 
   const createTask = e => {
@@ -31,6 +33,7 @@ export default function NewCard({ handleClose }) {
 
     if (!task.title || !task.description || !task.date) {
       setError("Пожалуйста, заполните все поля");
+      setIsLoading(false);
       return;
     }
 
@@ -75,7 +78,7 @@ export default function NewCard({ handleClose }) {
                 title={task.title}
                 description={task.description}
               />
-              <div className="pop-new-card__calendar calendar">
+              {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -174,7 +177,11 @@ export default function NewCard({ handleClose }) {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <Calendar
+                selected={task.date}
+                setSelected={date => setTask({ ...task, date })}
+              />
             </div>
             <CategoriesLabel topic={task.topic} setTask={setTask} task={task} />
             <BaseButton
