@@ -32,8 +32,7 @@ export default function NewCard({ handleClose }) {
       setError("Пожалуйста, заполните все поля");
       return;
     }
-    console.log();
-
+    
     addTask({ task, token: user.token })
       .then(res => {
         setTasks(res.tasks);
