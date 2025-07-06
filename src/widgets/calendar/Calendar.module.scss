@@ -1,0 +1,18 @@
+.calendar {
+  .rdp-root {
+  }
+
+  .rdp-months
+
+  .rdp-month_caption {
+    color: red;
+    & span {
+      font-size: 12px;
+    }
+  }
+
+  .rdp-caption_label {
+    font-size: 12px;
+    align-items: flex-start;
+  }
+}

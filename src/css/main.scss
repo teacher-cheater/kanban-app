@@ -984,27 +984,6 @@ body {
     }
   }
 
-  .pop-new-card {
-    &__container {
-      padding: 0;
-      justify-content: flex-start;
-    }
-
-    &__block {
-      padding: 20px 16px 32px;
-    }
-
-    &__form {
-      max-width: 100%;
-      width: 100%;
-      display: block;
-    }
-
-    &__calendar {
-      width: 100%;
-    }
-  }
-
   .form-new {
     &__area {
       max-width: 100%;

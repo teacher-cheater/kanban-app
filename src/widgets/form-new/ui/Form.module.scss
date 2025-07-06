@@ -1,5 +1,6 @@
 .form-new {
-  max-width: 370px;
+  // max-width: 370px;
+  flex: 1 1 calc(60% - 12px);
   width: 100%;
   display: block;
   margin-bottom: 20px;
