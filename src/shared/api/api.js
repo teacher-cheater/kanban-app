@@ -27,3 +27,18 @@ export async function addTask({ token, task }) {
     throw new Error(error.message);
   }
 }
+
+export async function updateTask({ task, token }) {
+  try {
+    const response = await axios.put(`${API_URL}/${task._id}`, task, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}

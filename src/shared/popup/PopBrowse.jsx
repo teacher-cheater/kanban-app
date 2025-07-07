@@ -1,31 +1,62 @@
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Calendar from "../../widgets/calendar/Calendar";
 import BaseButton from "../button/BaseButton";
+import { updateTask } from "../api/api";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../app/providers/router/AuthProvider/AuthContext";
+import { TasksContext } from "../../app/providers/TasksProvider/TasksContext";
+import { AppRoutes } from "../lib/appRoutes";
 
 export default function PopBrowse() {
-  // const { onClose, id, task } = props;
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const { tasks, setTasks } = useContext(TasksContext);
   const [isEdit, setIsEdit] = useState(false);
+  const [task, setTask] = useState({});
+  const [error, setError] = useState(false);
+
   console.log("id", id);
-  console.log("tasks", tasks);
+
+  useEffect(() => {
+    setTask(tasks.find(task => task?._id === id));
+  }, [tasks, id]);
+
+  const handlerUpdateTask = e => {
+    if (!task.description || !task.date || !task.status) {
+      setError("Пожалуйста, заполните все поля");
+    }
+
+    updateTask({ task, token: user.token }).then(res => {
+      setTasks(res.task);
+      navigate(AppRoutes.MAIN);
+      console.log("res", res);
+    });
+  };
 
   return (
-    <div className="pop-browse">
+    <div className="pop-browse" id="pop-browse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи</h3>
+              <h3 className="pop-browse__ttl">
+                {error ? (
+                  <div className="pop-browse__error"> {error} </div>
+                ) : (
+                  task?.title
+                )}
+              </h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{task?.topic}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
                 <div className="status__theme _hide">
-                  <p>Без статуса</p>
+                  <p>{task?.status}</p>
                 </div>
                 <div className="status__theme _gray">
                   <p className="_gray">Нужно сделать</p>
@@ -55,9 +86,12 @@ export default function PopBrowse() {
                     className="form-browse__area"
                     name="text"
                     id="textArea01"
-                    readOnly
-                    placeholder="Введите описание задачи..."
-                  ></textarea>
+                    readOnly={!isEdit}
+                    placeholder={task?.description}
+                    onChange={e => {
+                      setTask({ ...task, description: e.target.value });
+                    }}
+                  />
                 </div>
               </form>
               <div className="pop-new-card__calendar calendar">
@@ -70,21 +104,37 @@ export default function PopBrowse() {
                 <p className="_orange">Web Design</p>
               </div>
             </div>
-            <div className="pop-browse__btn-browse ">
-              <div className="btn-group">
-                <BaseButton textBtn={"Редактировать задачу"} type="button" />
-                <BaseButton textBtn={"Удалить задачу"} type="button" />
+            {!isEdit && (
+              <div className="pop-browse__btn-browse ">
+                <div className="btn-group">
+                  <BaseButton
+                    onClick={() => setIsEdit(prev => !prev)}
+                    textBtn={"Редактировать задачу"}
+                    type="button"
+                  />
+                  <BaseButton textBtn={"Удалить задачу"} type="button" />
+                </div>
+                <Link to={AppRoutes.MAIN}>Закрыть</Link>
               </div>
-              <BaseButton textBtn={"Закрыть"} type="button" />
-            </div>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <BaseButton textBtn={"Сохранить"} type="button" />
-                <BaseButton textBtn={"Отменить"} type="button" />
-                <BaseButton textBtn={"Удалить задачу"} type="button" />
+            )}
+            {isEdit && (
+              <div className="pop-browse__btn-edit">
+                <div className="btn-group">
+                  <BaseButton
+                    onClick={() => handlerUpdateTask()}
+                    textBtn={"Сохранить"}
+                    type="button"
+                  />
+                  <BaseButton
+                    onClick={() => setIsEdit(false)}
+                    textBtn={"Отменить"}
+                    type="button"
+                  />
+                  <BaseButton textBtn={"Удалить задачу"} type="button" />
+                </div>
+                <Link to={AppRoutes.MAIN}>Закрыть</Link>
               </div>
-              <BaseButton textBtn={"Закрыть"} type="button" onClick={onClose} />
-            </div>
+            )}
           </div>
         </div>
       </div>
