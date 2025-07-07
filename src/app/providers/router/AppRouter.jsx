@@ -1,32 +1,26 @@
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
-
 import MainPage from "../../../pages/ui/MainPage/MainPage";
 import SignInPage from "../../../pages/ui/SignInPage/SignInPage";
 import SignUpPage from "../../../pages/ui/SignUpPage/SignUpPage";
 import NotFoundPage from "../../../pages/ui/NotFoundPage/NotFoundPage";
-import ThemeProvider from "../ThemeApp/ThemeProvider";
- 
+import AddTaskPage from "../../../pages/ui/AddTask/AddTask";
+import TaskPage from "../../../pages/ui/Task/Task";
+import { AppRoutes } from "../../../shared/lib/appRoutes";
+
 export default function AppRouter() {
   return (
-    <ThemeProvider>
-      <Routes>
-        {/* Главная страница */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<MainPage />}>
-            {/* <Route path="/task/add" element={<NewTaskPage />} /> */}
-            {/* <Route path="/task/:id" element={<TaskPage />} /> */}
-            {/* <Route path="/train" element={<TrainPage />} /> */}
-          </Route>
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path={AppRoutes.MAIN} element={<MainPage />}>
+          <Route path={AppRoutes.ADD_TASK} element={<AddTaskPage />} />
+          <Route path={AppRoutes.TASK} element={<TaskPage />} />
+          {/* <Route path={AppRoutes.EXIT} element={<ExitPage />} /> */}
         </Route>
-        {/* Страница входа */}
-        <Route path="/sign-in" element={<SignInPage />} />
-        {/* Страница регистрации */}
-        <Route path="/sign-up" element={<SignUpPage />} />
-
-        {/* 404 */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </ThemeProvider>
+      </Route>
+      <Route path={AppRoutes.LOGIN} element={<SignInPage />} />
+      <Route path={AppRoutes.REGISTER} element={<SignUpPage />} />
+      <Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
+    </Routes>
   );
 }
