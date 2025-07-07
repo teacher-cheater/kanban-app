@@ -1,4 +1,5 @@
 import cls from "./TaskCard.module.scss";
+import { Link } from "react-router-dom";
 
 export default function TaskCard(props) {
   const { task, themeLabel } = props;
@@ -22,18 +23,16 @@ export default function TaskCard(props) {
           <div className={`${cls["card-task__theme"]} ${clsLabel}`}>
             {task.topic}
           </div>
-          <a href="#popBrowse" target="_self">
-            <div className={cls["card-task__btn"]}>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </a>
+          <Link to={`/task/${task._id}`} className={cls["card-task__btn"]}>
+            <div />
+            <div />
+            <div />
+          </Link>
         </div>
         <div className={cls["card-task__content"]}>
-          <a href="" target="_blank">
+          <Link to={`/task/${task._id}`} target="_blank">
             <h3 className={cls["card-task__title"]}>{task.title}</h3>
-          </a>
+          </Link>
           <div className={cls["card-task__date-info"]}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
