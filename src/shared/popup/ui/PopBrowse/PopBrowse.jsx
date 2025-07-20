@@ -8,6 +8,10 @@ import { TasksContext } from "../../../../app/providers/TasksProvider/TasksConte
 import { AppRoutes } from "../../../lib/appRoutes";
 
 import cls from "./PopBrowse.module.scss";
+import FormTextarea from "../../../form-textarea/FormTextarea";
+import { statusList } from "../../../lib/statusList";
+import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
+import { categories } from "../../../lib/categories";
 
 export default function PopBrowse() {
   const { id } = useParams();
@@ -18,9 +22,10 @@ export default function PopBrowse() {
   const [isEdit, setIsEdit] = useState(false);
   const [task, setTask] = useState({});
   const [error, setError] = useState(false);
+  const [checkedStatus, setCheckedStatus] = useState("");
 
   useEffect(() => {
-    setTask(tasks.find(task => task?._id === id));
+    setTask(tasks?.find(task => task?._id === id));
   }, [tasks, id]);
 
   const handlerUpdateTask = e => {
@@ -33,6 +38,9 @@ export default function PopBrowse() {
       navigate(AppRoutes.MAIN);
     });
   };
+
+  const currentCategory =
+    categories.find(cat => cat.id === task?.topic) || categories[0];
 
   return (
     <div className={cls["pop-browse"]}>
@@ -47,61 +55,52 @@ export default function PopBrowse() {
                   task?.title
                 )}
               </h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">{task?.topic}</p>
+              <div className={cls["categories-theme"]}>
+                <p className={currentCategory.className}>
+                  {currentCategory.name}
+                </p>
               </div>
             </div>
             <div className={cls["pop-browse__status status"]}>
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme">
-                  <p>{task?.status}</p>
-                </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme">
-                  <p>Готово</p>
-                </div>
+              <p className={cls["status__subttle"]}>Статус</p>
+              <div className={cls["status__themes"]}>
+                {isEdit ? (
+                  statusList.map(status => (
+                    <div
+                      className={`${cls["status__theme"]} ${
+                        task.status === status
+                          ? cls["status__theme--active"]
+                          : ""
+                      }`}
+                      key={status}
+                    >
+                      <input
+                        type="radio"
+                        name="status"
+                        value={status}
+                        className={cls["status__input"]}
+                        checked={task.status === status}
+                        onChange={() => setTask({ ...task, status })}
+                      />
+                      <p>{status}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className={cls["status__theme"]}>
+                    <p>{task?.status}</p>
+                  </div>
+                )}
               </div>
             </div>
             <div className={cls["pop-browse__wrap"]}>
-              <form className={cls["pop-browse__form form-browse"]}>
-                <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-browse__area"
-                    name="text"
-                    id="textArea01"
-                    readOnly={!isEdit}
-                    placeholder={task?.description}
-                    onChange={e => {
-                      setTask({ ...task, description: e.target.value });
-                    }}
-                  />
-                </div>
-              </form>
+              <FormTextarea isEdit={isEdit} task={task} setTask={setTask} />
               <div className={cls["pop-new-card__calendar"]}>
                 <Calendar />
               </div>
             </div>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
             {!isEdit && (
-              <div className={cls["pop-browse__btn-browse "]}>
-                <div className="btn-group">
+              <div className={cls["pop-browse__btn-browse"]}>
+                <div className={cls["pop-browse__btn-group"]}>
                   <BaseButton
                     onClick={() => setIsEdit(prev => !prev)}
                     textBtn={"Редактировать задачу"}
@@ -109,16 +108,22 @@ export default function PopBrowse() {
                   />
                   <BaseButton textBtn={"Удалить задачу"} type="button" />
                 </div>
-                <Link to={AppRoutes.MAIN}>Закрыть</Link>
+                <Link
+                  className={cls["pop-browse__close-link"]}
+                  to={AppRoutes.MAIN}
+                >
+                  Закрыть
+                </Link>
               </div>
             )}
             {isEdit && (
               <div className={cls["pop-browse__btn-edit"]}>
-                <div className="btn-group">
+                <div className={cls["pop-browse__btn-group"]}>
                   <BaseButton
                     onClick={() => handlerUpdateTask()}
                     textBtn={"Сохранить"}
                     type="button"
+                    primary={true}
                   />
                   <BaseButton
                     onClick={() => setIsEdit(false)}
@@ -127,7 +132,9 @@ export default function PopBrowse() {
                   />
                   <BaseButton textBtn={"Удалить задачу"} type="button" />
                 </div>
-                <Link to={AppRoutes.MAIN}>Закрыть</Link>
+                <div className={cls["pop-browse__btn-close"]}>
+                  <Link to={AppRoutes.MAIN}>Закрыть</Link>
+                </div>
               </div>
             )}
           </div>

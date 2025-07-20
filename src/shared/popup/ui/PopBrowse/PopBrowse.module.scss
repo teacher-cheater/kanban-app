@@ -65,32 +65,97 @@
     gap: 12px;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  &__calendar {
+    flex: 1 1 calc(30% - 12px);
   }
 
   &__form {
     max-width: 370px;
     flex: 1 1 calc(60% - 12px);
     width: 100%;
-    display: block;
+    // display: block;
     margin-bottom: 20px;
+  }
+
+  &__btn-group {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
   }
 
   &__btn-browse,
   &__btn-edit {
     display: flex;
-    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
+  }
 
-    & button {
-      height: 30px;
-      margin-bottom: 10px;
-      padding: 0 14px;
+  &__btn-browse {
+    display: flex;
+  }
+
+  &__close-link {
+    display: inline-block;
+    background-color: var(--bg-primary-color);
+    color: var(--gray-text);
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid var(--bg-primary-color);
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background-color: var(--bg-secondary-color);
     }
-    & .btn-group {
-      & button {
-        margin-right: 8px;
-      }
+  }
+}
+
+.categories-theme {
+  & p {
+    padding: 7.5px 20px;
+    border-radius: 24px;
+  }
+}
+
+.status {
+  &__subttle {
+    margin-bottom: 14px;
+  }
+
+  &__themes {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  &__theme {
+    cursor: pointer;
+    padding: 8px 15.5px;
+    background-color: var(--bg-color);
+    border: 0.7px solid var(--gray-bg);
+    color: var(--gray-bg);
+    font-size: 14px;
+    white-space: nowrap;
+    border-radius: 24px;
+    &--active {
+      background-color: var(--gray-bg);
+      color: var(--bg-color);
     }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    white-space: nowrap;
   }
 }
