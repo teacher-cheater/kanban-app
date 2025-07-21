@@ -15,6 +15,7 @@ export async function fetchTasks({ token }) {
 }
 
 export async function addTask({ token, task }) {
+  if (!task?._id) throw new Error("Task ID is required");
   try {
     const response = await axios.post(API_URL, task, {
       headers: {
@@ -29,6 +30,7 @@ export async function addTask({ token, task }) {
 }
 
 export async function updateTask({ task, token }) {
+  console.log(task, token);
   try {
     const response = await axios.put(`${API_URL}/${task._id}`, task, {
       headers: {

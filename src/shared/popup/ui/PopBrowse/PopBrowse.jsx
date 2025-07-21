@@ -20,7 +20,7 @@ export default function PopBrowse() {
 
   const { tasks, setTasks } = useContext(TasksContext);
   const [isEdit, setIsEdit] = useState(false);
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState(null);
   const [error, setError] = useState(false);
   const [checkedStatus, setCheckedStatus] = useState("");
 
@@ -31,12 +31,17 @@ export default function PopBrowse() {
   const handlerUpdateTask = e => {
     if (!task.description || !task.date || !task.status) {
       setError("Пожалуйста, заполните все поля");
+      return;
     }
 
-    updateTask({ task, token: user.token }).then(res => {
-      setTasks(res.task);
-      navigate(AppRoutes.MAIN);
-    });
+    updateTask({ task, token: user.token })
+      .then(res => {
+        setTasks(res.tasks);
+        navigate(AppRoutes.MAIN);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
   };
 
   const currentCategory =
