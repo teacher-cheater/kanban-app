@@ -1,17 +1,18 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Calendar from "../../../../widgets/calendar/Calendar";
-import BaseButton from "../../../button/BaseButton";
-import { updateTask } from "../../../api/api";
 import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
-import { AppRoutes } from "../../../lib/appRoutes";
 
-import cls from "./PopBrowse.module.scss";
+import { AppRoutes } from "../../../lib/appRoutes";
+import { updateTask } from "../../../api/api";
+
+import Calendar from "../../../../widgets/calendar/Calendar";
+import BaseButton from "../../../button/BaseButton";
 import FormTextarea from "../../../form-textarea/FormTextarea";
+
 import { statusList } from "../../../lib/statusList";
-import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
 import { categories } from "../../../lib/categories";
+import cls from "./PopBrowse.module.scss";
 
 export default function PopBrowse() {
   const { id } = useParams();
@@ -22,7 +23,8 @@ export default function PopBrowse() {
   const [isEdit, setIsEdit] = useState(false);
   const [task, setTask] = useState(null);
   const [error, setError] = useState(false);
-  const [checkedStatus, setCheckedStatus] = useState("");
+
+  console.log("task", task);
 
   useEffect(() => {
     setTask(tasks?.find(task => task?._id === id));
@@ -85,7 +87,10 @@ export default function PopBrowse() {
                         value={status}
                         className={cls["status__input"]}
                         checked={task.status === status}
-                        onChange={() => setTask({ ...task, status })}
+                        onChange={() => {
+                          console.log('status', status);
+                          setTask({ ...task, status })
+                        }}
                       />
                       <p>{status}</p>
                     </div>
