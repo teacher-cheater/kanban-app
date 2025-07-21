@@ -543,6 +543,7 @@ input:checked[type=checkbox]::before {
 .main__content {
   width: 100%;
   display: flex;
+  gap: 12px;
 }
 
 .main__column {

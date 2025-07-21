@@ -24,8 +24,6 @@ export default function PopBrowse() {
   const [task, setTask] = useState(null);
   const [error, setError] = useState(false);
 
-  console.log("task", task);
-
   useEffect(() => {
     setTask(tasks?.find(task => task?._id === id));
   }, [tasks, id]);
@@ -87,10 +85,7 @@ export default function PopBrowse() {
                         value={status}
                         className={cls["status__input"]}
                         checked={task.status === status}
-                        onChange={() => {
-                          console.log('status', status);
-                          setTask({ ...task, status })
-                        }}
+                        onChange={() => setTask({ ...task, status })}
                       />
                       <p>{status}</p>
                     </div>
