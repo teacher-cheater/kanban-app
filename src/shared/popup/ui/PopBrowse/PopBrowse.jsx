@@ -4,7 +4,7 @@ import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthC
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
 
 import { AppRoutes } from "../../../lib/appRoutes";
-import { updateTask } from "../../../api/api";
+import { deleteTask, updateTask } from "../../../api/api";
 
 import Calendar from "../../../../widgets/calendar/Calendar";
 import BaseButton from "../../../button/BaseButton";
@@ -35,6 +35,17 @@ export default function PopBrowse() {
     }
 
     updateTask({ task, token: user.token })
+      .then(res => {
+        setTasks(res.tasks);
+        navigate(AppRoutes.MAIN);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
+  };
+
+  const handlerDeleteTask = e => {
+    deleteTask({ task, token: user.token })
       .then(res => {
         setTasks(res.tasks);
         navigate(AppRoutes.MAIN);
@@ -111,7 +122,11 @@ export default function PopBrowse() {
                     textBtn={"Редактировать задачу"}
                     type="button"
                   />
-                  <BaseButton textBtn={"Удалить задачу"} type="button" />
+                  <BaseButton
+                    textBtn={"Удалить задачу"}
+                    type="button"
+                    onClick={() => handlerDeleteTask()}
+                  />
                 </div>
                 <Link
                   className={cls["pop-browse__close-link"]}

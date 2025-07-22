@@ -30,9 +30,23 @@ export async function addTask({ token, task }) {
 }
 
 export async function updateTask({ task, token }) {
-  console.log(task, token);
   try {
     const response = await axios.put(`${API_URL}/${task._id}`, task, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteTask({ task, token }) {
+  try {
+    const response = await axios.delete(`${API_URL}/${task._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "",
