@@ -79,11 +79,13 @@ export default function AuthForm({ isSignUp }) {
   };
 
   return (
-    <div className={cls.modalWrapper}>
-      <div className={cls.modal}>
-        <h2 className={cls.title}>{isSignUp ? "Регистрация" : "Вход"}</h2>
-        <form className={cls.container} onSubmit={handleSubmit}>
-          <div className={cls.inputWrapper}>
+    <div className={cls["modal-wrapper"]}>
+      <div className={cls["modal"]}>
+        <h2 className={cls["modal__title"]}>
+          {isSignUp ? "Регистрация" : "Вход"}
+        </h2>
+        <form className={cls["modal__container"]} onSubmit={handleSubmit}>
+          <div className={cls["modal__input-wrapper"]}>
             {isSignUp && (
               <BaseInput
                 type="text"
@@ -115,20 +117,20 @@ export default function AuthForm({ isSignUp }) {
               autoComplete="current-password"
             />
           </div>
-          <div className={cls.loginError}>{error}</div>
+          <div className={cls["modal__login-error"]}>{error}</div>
           <BaseButton
             textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="submit"
           />
         </form>
         {!isSignUp && (
-          <div className={cls.formGroup}>
+          <div className={cls["modal__form-group"]}>
             <p>Нужно зарегистрироваться?</p>
             <Link to="/sign-up">Регистрируйтесь здесь</Link>
           </div>
         )}
         {isSignUp && (
-          <div className={cls.formGroup}>
+          <div className={cls["modal__form-group"]}>
             <p>Уже есть аккаунт?</p>
             <Link to="/sign-in"> Войдите здесь</Link>
           </div>

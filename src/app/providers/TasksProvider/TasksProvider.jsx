@@ -22,7 +22,7 @@ function TasksProvider({ children }) {
       }
     };
     if (user?.token) loadTasks();
-  }, [user.token]);
+  }, [user?.token]);
 
   return (
     <TasksContext.Provider value={{ tasks, setTasks, loading, error }}>

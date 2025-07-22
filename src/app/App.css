@@ -501,13 +501,6 @@ input:checked[type=checkbox]::before {
   padding: 0;
 }
 
-
-.main__column {
-  width: 20%;
-  margin: 0 auto;
-  display: block;
-}
-
 .column__title {
   padding: 0 10px;
   margin: 15px 0;
