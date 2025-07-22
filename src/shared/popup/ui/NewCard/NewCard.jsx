@@ -92,6 +92,7 @@ export default function NewCard({ handleClose }) {
               onClick={() => createTask()}
               className={`${cls["form-new__create"]} _hover01`}
               disabled={isLoading}
+              primary={true}
             />
           </div>
         </div>

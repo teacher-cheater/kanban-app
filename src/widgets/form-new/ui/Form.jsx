@@ -6,7 +6,7 @@ export default function Form(props) {
   return (
     <form className={cls["form-new"]} id="formNewCard">
       <div className={cls["form-new__block"]}>
-        <label htmlFor="formTitle" className="subttl">
+        <label htmlFor="formTitle" className={cls["form-new__subttle"]}>
           Название задачи
         </label>
         <input
@@ -21,7 +21,7 @@ export default function Form(props) {
         />
       </div>
       <div className={cls["form-new__block"]}>
-        <label htmlFor="textArea" className="subttl">
+        <label htmlFor="textArea" className={cls["form-new__subttle"]}>
           Описание задачи
         </label>
         <textarea

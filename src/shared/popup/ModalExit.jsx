@@ -13,6 +13,7 @@ export default function ModalExit({ handleClose }) {
           type={"button"}
           onClick={logout}
           className="pop-exit__exit-yes _hover01"
+          primary={true}
         />
         <BaseButton
           textBtn={"Нет, остаться"}

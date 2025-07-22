@@ -6,13 +6,13 @@ export default function CategoriesLabel(props) {
 
   return (
     <div>
-      <div className={cls.categories}>
-        <p className={`${cls.categories__p} subttl`}>Категория</p>
-        <div className={cls.categories__themes}>
+      <div className={cls["categories"]}>
+        <p className={`${cls["categories__subttle"]} `}>Категория</p>
+        <div className={cls["categories__themes"]}>
           {categories.map(item => (
             <div
               className={`
-                ${cls.categories__theme}
+                ${cls["categories__theme"]}
                 ${item.className}
                 ${topic === item.id ? "_active-category" : ""}
               `}
