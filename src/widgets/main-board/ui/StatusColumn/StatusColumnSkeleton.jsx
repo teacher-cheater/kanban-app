@@ -1,12 +1,12 @@
 import React from "react";
 
 import Skeleton from "react-loading-skeleton";
-import "./StatusColumn.css";
+import cls from "./StatusColumn.module.scss";
 
 const StatusColumnSkeleton = React.memo(() => {
   return (
-    <div className="skeleton-card">
-      <div className="skeleton-header">
+    <div className={cls["skeleton-card"]}>
+      <div className={cls["skeleton-header"]}>
         <Skeleton
           width={80}
           height={20}
@@ -15,7 +15,7 @@ const StatusColumnSkeleton = React.memo(() => {
         />
       </div>
 
-      <div className="skeleton-content">
+      <div className={cls["skeleton-content"]}>
         <Skeleton
           count={1}
           height={12}
@@ -36,7 +36,7 @@ const StatusColumnSkeleton = React.memo(() => {
         />
       </div>
 
-      <div className="skeleton-footer">
+      <div className={cls["skeleton-footer"]}>
         <Skeleton
           width={70}
           height={14}

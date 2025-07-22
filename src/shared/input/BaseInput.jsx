@@ -1,4 +1,4 @@
-import cls from "./BaseInput.module.css";
+import cls from "./BaseInput.module.scss";
 
 export default function BaseInput(props) {
   const { type, name, placeholder, id, error, ...restProps } = props;

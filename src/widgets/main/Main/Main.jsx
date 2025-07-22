@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
-import MainBoard from "../../main-board/ui/MainBoard";
+import { useContext } from "react";
 import { TasksContext } from "../../../app/providers/TasksProvider/TasksContext";
 import "react-loading-skeleton/dist/skeleton.css";
 import cls from "./Main.module.scss";
+import MainBoard from "../../main-board/MainBoard/MainBoard";
 
 export default function Main() {
   const { tasks, loading, error } = useContext(TasksContext);
