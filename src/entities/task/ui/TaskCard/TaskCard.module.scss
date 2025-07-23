@@ -2,6 +2,14 @@
   width: 100%;
   display: block;
   position: relative;
+  & .dragging {
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px dashed var(--gray-bg);
+  }
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
 
   &__item {
     padding: 5px;

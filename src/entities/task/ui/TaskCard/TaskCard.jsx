@@ -1,8 +1,22 @@
-import cls from "./TaskCard.module.scss";
+import { useDrag, useDrop } from "react-dnd";
 import { Link } from "react-router-dom";
+import { ItemTypes } from "../../../../shared/lib/itemTypes";
+import cls from "./TaskCard.module.scss";
 
 export default function TaskCard(props) {
   const { task, themeLabel } = props;
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.TASK,
+    item: {
+      id: task._id,
+      status: task.status,
+    },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   const clsLabel = themeLabel ? `${themeLabel}` : "";
 
   function formatDate(isoDateString) {
@@ -17,7 +31,11 @@ export default function TaskCard(props) {
   }
 
   return (
-    <article className={cls["card-task"]}>
+    <article
+      ref={drag}
+      className={`${cls["card-task"]} ${isDragging ? cls["dragging"] : ""}`}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
       <div className={cls["card-task__item"]}>
         <div className={cls["card-task__group"]}>
           <div className={`${cls["card-task__theme"]} ${clsLabel}`}>

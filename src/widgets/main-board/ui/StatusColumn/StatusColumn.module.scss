@@ -1,55 +1,62 @@
 @keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
+  0% {
+    background-position: -1000px 0;
+  }
 
-    100% {
-        background-position: 1000px 0;
-    }
+  100% {
+    background-position: 1000px 0;
+  }
 }
 
 .skeleton-card {
-    position: relative;
-    background: var(--bg-main);
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 12px;
-    width: 220px;
-    border: 1px solid var(--border-primary);
-    margin-bottom: 20px;
+  position: relative;
+  background: var(--bg-main);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 12px;
+  width: 220px;
+  border: 1px solid var(--border-primary);
+  margin-bottom: 20px;
 }
 
 .skeleton-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            var(--white) 50%,
-            transparent 100%);
-    animation: shimmer 1.2s infinite linear;
-    background-size: 1000px 100%;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--white) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.2s infinite linear;
+  background-size: 1000px 100%;
 }
 
 .skeleton-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .skeleton-content,
 .skeleton-footer {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .status-column {
   width: 20%;
   margin: 0 auto;
   display: block;
+  &.over {
+    background-color: var(--border-primary);
+    border-radius: var(--small-size);
+    transition: background-color 0.2s;
+  }
 }
