@@ -2,14 +2,15 @@ import { useContext, useState } from "react";
 import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
 import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/api";
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";
 import cls from "./NewCard.module.scss";
 import Calendar from "../../../../widgets/calendar/Calendar";
+import { AppRoutes } from "../../../lib/appRoutes";
 
-export default function NewCard({ handleClose }) {
+export default function NewCard() {
   const { setTasks } = useContext(TasksContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -40,10 +41,9 @@ export default function NewCard({ handleClose }) {
     addTask({ task, token: user.token })
       .then(res => {
         setTasks(res.tasks);
-        navigate("/");
+        navigate(AppRoutes.MAIN);
         task.title = "";
         task.description = "";
-        handleClose();
       })
       .catch(() => {
         setError("Что-то пошло не так. Попробуйте еще раз");
@@ -66,7 +66,7 @@ export default function NewCard({ handleClose }) {
               )}
             </h3>
             <button
-              onClick={handleClose}
+              onClick={() => navigate(AppRoutes.MAIN)}
               className={cls["pop-new-card__close"]}
             >
               &#10006;
@@ -90,7 +90,7 @@ export default function NewCard({ handleClose }) {
               textBtn={isLoading ? "Создание..." : "Создать задачу"}
               type={"button"}
               onClick={() => createTask()}
-              className={`${cls["form-new__create"]} _hover01`}
+              className={cls["form-new__create"]}
               disabled={isLoading}
               primary={true}
             />
