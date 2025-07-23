@@ -4,7 +4,6 @@ import { ThemeContext } from "./ThemeContext";
 export default function ThemeProvider({ children }) {
   const appTheme = localStorage.getItem("app-theme") || "_light";
   const [theme, setTheme] = useState(appTheme);
-  console.log("theme", theme);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
