@@ -4,9 +4,11 @@ import BaseButton from "../../../button/BaseButton";
 import { AppRoutes } from "../../../lib/appRoutes";
 
 import cls from "./ModalExit.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function ModalExit() {
   const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <form className={cls["exit-form"]}>
@@ -22,7 +24,7 @@ export default function ModalExit() {
           textBtn={"Нет, остаться"}
           type={"button"}
           className={cls["exit-form__exit-no"]}
-          to={AppRoutes.MAIN}
+          onClick={() => navigate(AppRoutes.MAIN)}
         />
       </div>
     </form>

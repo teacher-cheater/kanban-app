@@ -7,6 +7,8 @@ import NotFoundPage from "../../../pages/ui/NotFoundPage/NotFoundPage";
 import AddTaskPage from "../../../pages/ui/AddTask/AddTask";
 import TaskPage from "../../../pages/ui/Task/Task";
 import { AppRoutes } from "../../../shared/lib/appRoutes";
+import UserMenu from "../../../widgets/header/ui/UserMenu/UserMenu";
+import PopupExit from "../../../shared/popup/ui/PopupExit/PopupExit";
 
 export default function AppRouter() {
   return (
@@ -15,7 +17,7 @@ export default function AppRouter() {
         <Route path={AppRoutes.MAIN} element={<MainPage />}>
           <Route path={AppRoutes.ADD_TASK} element={<AddTaskPage />} />
           <Route path={AppRoutes.TASK} element={<TaskPage />} />
-          {/* <Route path={AppRoutes.EXIT} element={<PopExit />} /> */}
+          <Route path={AppRoutes.EXIT} element={<PopupExit />} />
         </Route>
       </Route>
       <Route path={AppRoutes.LOGIN} element={<SignInPage />} />
