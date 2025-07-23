@@ -1,11 +1,12 @@
 .baseInput {
-    border: 1px solid #94a6be66;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    color: #94a6be;
+  border: 1px solid var(--gray-bg);
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  color: var(--gray-bg);
+  background-color: transparent;
 }
-    
+
 .baseInput:focus {
-    outline: 1px solid #889ab266;
+  outline: 1px solid var(--border);
 }

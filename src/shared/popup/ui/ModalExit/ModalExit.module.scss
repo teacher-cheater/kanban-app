@@ -1,0 +1,15 @@
+.exit-form {
+  &__exit-yes {
+  }
+
+  &__exit-no {
+  }
+
+  &__form-group {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

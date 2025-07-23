@@ -121,6 +121,7 @@ export default function AuthForm({ isSignUp }) {
           <BaseButton
             textBtn={isSignUp ? "Зарегистрироваться" : "Войти"}
             type="submit"
+            primary={true}
           />
         </form>
         {!isSignUp && (

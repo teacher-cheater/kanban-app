@@ -15,7 +15,7 @@ export default function AppRouter() {
         <Route path={AppRoutes.MAIN} element={<MainPage />}>
           <Route path={AppRoutes.ADD_TASK} element={<AddTaskPage />} />
           <Route path={AppRoutes.TASK} element={<TaskPage />} />
-          {/* <Route path={AppRoutes.EXIT} element={<ExitPage />} /> */}
+          {/* <Route path={AppRoutes.EXIT} element={<PopExit />} /> */}
         </Route>
       </Route>
       <Route path={AppRoutes.LOGIN} element={<SignInPage />} />

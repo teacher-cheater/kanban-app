@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Form from "../../../../widgets/form-new/ui/Form";
 import BaseButton from "../../../button/BaseButton";
 import CategoriesLabel from "../../../CategoriesLabel/CategoriesLabel";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addTask } from "../../../api/api";
 import { TasksContext } from "../../../../app/providers/TasksProvider/TasksContext";
 import { AuthContext } from "../../../../app/providers/router/AuthProvider/AuthContext";

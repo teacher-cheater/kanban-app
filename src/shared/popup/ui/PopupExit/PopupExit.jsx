@@ -1,7 +1,7 @@
-import ModalExit from "../../ModalExit";
+import ModalExit from "../ModalExit/ModalExit";
 import cls from "./PopupExit.module.scss";
 
-export default function PopupExit({ handleClose }) {
+export default function PopupExit() {
   return (
     <div className={cls["pop-exit"]}>
       <div className={cls["pop-exit__container"]}>
@@ -9,7 +9,7 @@ export default function PopupExit({ handleClose }) {
           <div className={cls["pop-exit__ttl"]}>
             <h2>Выйти из аккаунта?</h2>
           </div>
-          <ModalExit handleClose={handleClose} />
+          <ModalExit />
         </div>
       </div>
     </div>
