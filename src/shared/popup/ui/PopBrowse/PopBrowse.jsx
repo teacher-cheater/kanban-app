@@ -111,7 +111,11 @@ export default function PopBrowse() {
             <div className={cls["pop-browse__wrap"]}>
               <FormTextarea isEdit={isEdit} task={task} setTask={setTask} />
               <div className={cls["pop-new-card__calendar"]}>
-                <Calendar />
+                <Calendar
+                  isEdit={isEdit}
+                  selected={task?.date}
+                  setSelected={date => setTask({ ...task, date })}
+                />
               </div>
             </div>
             {!isEdit && (
